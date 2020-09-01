@@ -1,0 +1,13 @@
+.App {
+  text-align: center;
+}
+
+.App-header {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+}
+nav > ul {
+  display: grid;
+}
+
+
