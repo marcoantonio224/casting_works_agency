@@ -1,13 +1,51 @@
+
 .App {
   text-align: center;
+  font-family: serif;
 }
 
 .App-header {
   display: grid;
   grid-template-columns: 1fr 2fr;
+  position: fixed;
+  height: 5em;
+  background-color: white;
+  width: 100%;
+  margin-top: -100px;
+  padding-top: 2%;
+  box-shadow: 1px 1px 14px;
 }
+
+#title {
+  text-decoration: none;
+  color: darkcyan;
+ }
+
 nav > ul {
   display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
 }
 
+.sub-header{
+  display: grid;
+  justify-items: baseline;
+  margin-left: 4%;
+}
 
+ul > a {
+  text-decoration: none;
+  color: darkcyan;
+  width: 10%;
+}
+
+#intro {
+  width: 50%;
+  line-height: 28px;
+  display: grid;
+  align-self: center;
+  padding: 2%;
+}
+
+.logos-image {
+  width: 50%;
+}
