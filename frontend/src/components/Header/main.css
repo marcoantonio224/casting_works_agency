@@ -1,0 +1,42 @@
+
+header {
+  display: grid!important;
+  grid-template-columns: 1fr 2fr;
+  position: fixed;
+  height: 100px;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: white;
+  box-shadow: 1px 1px 14px;
+}
+
+#title {
+  text-decoration: none;
+  color: #18a2b8;
+ }
+
+nav > ul {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.sub-header{
+  display: grid;
+  justify-items: baseline;
+  margin-left: 4%;
+}
+
+.sub-header > h2 {
+  padding-top: 5%;
+}
+
+header > nav {
+  padding-top: 4%;
+}
+
+ul > a {
+  text-decoration: none;
+  color: #18a2b8;
+  width: 10%;
+}

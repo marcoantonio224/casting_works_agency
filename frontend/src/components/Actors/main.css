@@ -1,0 +1,22 @@
+.main-content-actors {
+  margin-top: 8%;
+  padding: 1%;
+}
+
+.actors {
+  width: 100%;
+}
+
+.sub-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.text-content {
+  text-align: left;
+  padding:2%;
+}
+
+li {
+  text-decoration: none;
+}
