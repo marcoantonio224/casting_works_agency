@@ -1,5 +1,6 @@
 import react from 'react';
 import React, { useState } from 'react';
+import { useAuth0 } from '@auth0/auth0-react';
 import new_actors from '../../assets/images/new_actors.jpg'
 import casting from '../../assets/images/casting.jpg';
 import './main.css';
@@ -8,9 +9,10 @@ const main = {
 
 }
 
-
 function Actors() {
-  // const [count, setCount] = useState(0);
+  const [actors, setActors] = useState([1]);
+  const { user } = useAuth0();
+
   return (
     <section className="main-content-actors">
       <div className="sub-content">
@@ -39,7 +41,12 @@ function Actors() {
           </div>
       </div>
       <div>
-
+          <h3>CastingWorks Actresses & Actors</h3>
+          <div>
+            {(actors.length === 0) ? <h4>There are no current actors.</h4> :
+              (!user) ?  'Regular user' : 'Executive or so'
+            }
+          </div>
       </div>
     </section>
   );

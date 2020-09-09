@@ -1,14 +1,16 @@
 import react from 'react';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import LoginButton from '../LoginButton/index';
+import LogoutButton from '../LogoutButton/index';
+
 import casting from '../../assets/images/casting.jpg';
 import new_actors from '../../assets/images/new_actors.jpg';
 import actors_waiting from '../../assets/images/actors_waiting.jpg';
 import casting_directors from '../../assets/images/casting-directors.jpg';
 import hollywood_map from '../../assets/images/hollywood_map.jpg';
 import movies from '../../assets/images/movies.jpg';
-
-import {Button} from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 import './main.css';
 
 const main = {
@@ -29,14 +31,15 @@ function Home() {
       <div style={main}>
         <div id='intro'>
           <h5>
-                Lights, Camera, Action! Welcome to our casting agecy. Where <span className='emphasis'>Legends</span> are made. Where <span className='emphasis'>Dreams</span> come true. Where <span className='emphasis'>Stars</span> are born. Our agency provides opportunites for those who got what it takes to be in the movie business. Consult with one of our agents to get you started. Your new
+                Lights, Camera, Action! Welcome to our casting agency. Where <span className='emphasis'>Legends</span> are made. Where <span className='emphasis'>Dreams</span> come true. Where <span className='emphasis'>Stars</span> are born. Our agency provides opportunites for those who got what it takes to be in the movie business. Consult with one of our agents to get you started. Your new
                 life begins now.
-            </h5>
-            <br />
-            <div className="buttonContainers">
-                <Button variant="outline-info">Sign in</Button>
-                <Button variant="outline-info">Login</Button>
-            </div>
+          </h5>
+          <br />
+          <div className="buttonContainers">
+              <Button variant="outline-info">Sign in</Button>
+              <LoginButton />
+              <LogoutButton />
+          </div>
         </div>
       </div>
       <section className="section1">

@@ -8,13 +8,17 @@ header {
   left: 0;
   width: 100%;
   background-color: white;
-  box-shadow: 1px 1px 14px;
 }
 
 #title {
   text-decoration: none;
   color: #18a2b8;
  }
+
+header > nav {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+}
 
 nav > ul {
   display: grid;
