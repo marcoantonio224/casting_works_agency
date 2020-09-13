@@ -1,5 +1,5 @@
 import react from 'react';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import LoginButton from '../LoginButton/index';
 import LogoutButton from '../LogoutButton/index';
@@ -11,6 +11,7 @@ import casting_directors from '../../assets/images/casting-directors.jpg';
 import hollywood_map from '../../assets/images/hollywood_map.jpg';
 import movies from '../../assets/images/movies.jpg';
 import { Button } from 'react-bootstrap';
+import { useAuth0 } from '@auth0/auth0-react';
 import './main.css';
 
 const main = {
@@ -25,10 +26,35 @@ const main = {
 
 
 function Home() {
-  // const [count, setCount] = useState(0);
+  const [token, setToken] = useState(false);
+  const { user, getAccessTokenSilently } = useAuth0();
+
+  // useEffect(()=>{
+
+  //   const getUserMetadata = async () => {
+
+  //     const domain = process.env.REACT_APP_AUTH0_DOMAIN
+
+  //     try {
+  //       // Grab token from auth0
+  //       const accessToken = await getAccessTokenSilently({
+  //         audience: 'https://castingworksfsnd.us.auth0.com/api/v2/'
+  //       });
+
+  //     } catch(err) {
+  //       console.log('User not signed in')
+  //     }
+
+
+  //   }
+  //   getUserMetadata();
+
+  // },[])
+  const { nickname } = user || {};
   return (
     <div className="main-content">
       <div style={main}>
+        {(user) ? <h4>{nickname}</h4> : ''}
         <div id='intro'>
           <h5>
                 Lights, Camera, Action! Welcome to our casting agency. Where <span className='emphasis'>Legends</span> are made. Where <span className='emphasis'>Dreams</span> come true. Where <span className='emphasis'>Stars</span> are born. Our agency provides opportunites for those who got what it takes to be in the movie business. Consult with one of our agents to get you started. Your new
@@ -89,18 +115,6 @@ function Home() {
                   partnerships with other companies that provide private lessons.
               </p>
           </div>
-      </section>
-      <section>
-        <h2>Location</h2>
-        <div className="location">
-          <div>
-            <img src={hollywood_map} className="location-map" />
-            <p>
-              We are located in Hollywood right next the Hollywood Theater on
-              North East 40th Avenue.
-            </p>
-          </div>
-        </div>
       </section>
     </div>
   );

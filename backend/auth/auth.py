@@ -8,7 +8,7 @@ from flask import request, _request_ctx_stack, abort
 
 AUTH0_DOMAIN = os.getenv('AUTH0_DOMAIN')
 ALGORITHMS = ['RS256']
-API_AUDIENCE = 'movies'
+API_AUDIENCE = 'actions'
 
 ## AuthError Exception
 '''
@@ -26,7 +26,6 @@ class AuthError(Exception):
 def get_token_auth_header():
     """ Get the Access Token from the Authorization Header """
     auth = request.headers.get('Authorization', None)
-    print(auth)
     try:
         # Check to see if Authoriztion header is present
         if auth is None:

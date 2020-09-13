@@ -1,18 +1,40 @@
 import react from 'react';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
-import new_actors from '../../assets/images/new_actors.jpg'
+import { getData } from '../../api/api';
+import new_actors from '../../assets/images/new_actors.jpg';
 import casting from '../../assets/images/casting.jpg';
 import './main.css';
 
-const main = {
-
-}
 
 function Actors() {
-  const [actors, setActors] = useState([1]);
-  const { user } = useAuth0();
+  const [actors, setActors] = useState([]);
+  const [token, setToken] = useState(false);
+  const { user, isAuthenticated , getAccessTokenSilently } = useAuth0()
+  console.log(user)
+  useEffect(()=>{
 
+    const getUserMetadata = async () => {
+      try {
+        // Async function for actors audience token
+        const accessToken = await getAccessTokenSilently({
+          audience: 'actions',
+        });
+
+        // Set the token
+        setToken(accessToken);
+
+      } catch(err) {
+        console.log(err)
+      }
+    }
+    // Call function to obtain token
+    getUserMetadata();
+
+  },[]);
+
+  // Send the api token to server for validation
+  const res = getData(token, '/actors');
   return (
     <section className="main-content-actors">
       <div className="sub-content">
@@ -44,7 +66,11 @@ function Actors() {
           <h3>CastingWorks Actresses & Actors</h3>
           <div>
             {(actors.length === 0) ? <h4>There are no current actors.</h4> :
-              (!user) ?  'Regular user' : 'Executive or so'
+              (!user) ?
+                  'Regular user'
+                  :
+                  'Executive or so'
+
             }
           </div>
       </div>

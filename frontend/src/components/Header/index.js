@@ -5,11 +5,15 @@ import logos from '../../assets/images/casting_logos.jpg';
 import './main.css';
 
 function Header() {
-  const { loginWithRedirect } = useAuth0();
+  const { user, getAccessTokenSilently,loginWithRedirect } = useAuth0();
+
+  const { nickname } = user || {};
+
   return (
     <header>
         <div className="sub-header">
             <h2 ><Link to='/' id='title'>CastingWorks</Link></h2>
+            {(user)?<p>logged in as {nickname}</p>:''}
         </div>
         <nav>
             <ul>

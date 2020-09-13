@@ -1,14 +1,39 @@
 import react from 'react';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useAuth0 } from '@auth0/auth0-react';
+import { getData } from '../../api/api';
 import film_shooting from '../../assets/images/film_shooting.jpg'
 import casting from '../../assets/images/casting.jpg';
 
-const main = {
-}
-
-
 function Movies() {
   const [movies, setMovies] = useState([]);
+  const [token, setToken] = useState(false);
+  const { user, getAccessTokenSilently } = useAuth0();
+
+  useEffect(()=>{
+    // Async function for movies audience token
+    const getUserMetadata = async () => {
+      try {
+
+        // Grab token from auth0
+        const accessToken = await getAccessTokenSilently({
+          audience: 'actions'
+        });
+
+        setToken(accessToken);
+
+      } catch(err) {
+        console.log(err)
+      }
+    }
+
+    // Call function to obtain token
+    getUserMetadata();
+
+  },[]);
+
+  const data = getData(token, '/movies');
+
   return (
     <section className="main-content-actors">
       <div className="sub-content">
