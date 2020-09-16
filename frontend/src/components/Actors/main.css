@@ -20,3 +20,12 @@
 li {
   text-decoration: none;
 }
+
+.actor-form {
+  padding: 2%;
+ }
+
+.actors-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}

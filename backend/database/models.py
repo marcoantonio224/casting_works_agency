@@ -21,32 +21,36 @@ def setup_db(app, database_path=database_path):
   app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
   db.app = app
   db.init_app(app)
+  # db.drop_all()
   db.create_all()
   migrate = Migrate(app, db)
 
 '''
   Movies
 '''
-class Movies(db.Model):
+class Movie(db.Model):
   __tablename__ = "movies"
 
   id = Column(Integer, primary_key=True)
   title = Column(db.String(120), nullable=False)
   release_date = Column(db.String(120), nullable=False)
-  picture_path = Column(db.String(300), nullable=False, unique=True, server_default='default.jpg')
-  actor = db.relationship('Actor', cascade='all, delete-orphan', backref='movie', lazy=True)
+  # actor = db.relationship('Actor', cascade='all,  delete-orphan', backref='movie', lazy=True)
 
   @validates('title','release_date')
   def validate_moives(self, keys, values):
     specialChars = re.compile('[@_!#$%^&*()<>/\|}{~:]')
 
-    if value == '':
+    if values == '':
       raise AssertionError('Cannot contain empty fields')
 
     elif specialChars.search(values) is not None:
       raise AssertionError('Cannot contain special characters')
 
-    return value
+    return values
+
+  def __init__(self, title, release_date):
+    self.title = title
+    self.release_date = release_date
 
   def insert(self):
     db.session.add(self)
@@ -59,32 +63,44 @@ class Movies(db.Model):
   def update(self):
     db.session.commit()
 
+  def short(self):
+    return {
+        'id': self.id,
+        'title': self.title,
+        'release_date': self.release_date
+    }
 
+  def __repr__(self):
+    return json.dumps(self.short())
 
 '''
   Actors
 '''
-class Actors(db.Model):
+class Actor(db.Model):
   __tablename__ = "actors"
 
   id = Column(Integer, primary_key=True)
   name = Column(db.String(120), nullable=False)
-  age = Column(db.String(120), nullable=False)
+  age = Column(db.Integer, nullable=False)
   gender = Column(db.String(120), nullable=False)
-  picture_path = Column(db.String(300), nullable=False, unique=True, server_default='avatar.jpg')
-  movie = Column(db.Integer, db.ForeignKey('movie.id') )
+  # movie = Column(db.Integer, db.ForeignKey('movie.id') )
 
   @validates('name', 'age', 'gender')
   def validate_actors(self, keys, values):
     specialChars = re.compile('[@_!#$%^&*()<>/\|}{~:]')
 
-    if value == '':
+    if values == '':
       raise AssertionError('Cannot contain empty fields')
 
-    elif specialChars.search(values) is not None:
+    elif specialChars.search('values') is not None:
       raise AssertionError('Cannot contain special characters')
 
-    return value
+    return values
+
+  def __init__(self, name, age, gender):
+    self.name = name
+    self.age = age
+    self.gender = gender
 
   def insert(self):
     db.session.add(self)
@@ -97,3 +113,13 @@ class Actors(db.Model):
   def update(self):
     db.session.commit()
 
+  def short(self):
+    return {
+        'id': self.id,
+        'name': self.name,
+        'age': self.age,
+        'gender': self.gender
+    }
+
+  def __repr__(self):
+    return json.dumps(self.short())

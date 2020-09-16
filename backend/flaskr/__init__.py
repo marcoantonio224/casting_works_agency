@@ -4,12 +4,17 @@ from flask import Flask, request, jsonify, abort
 from sqlalchemy import exc
 from flask_cors import CORS
 
-#from .database.models import db_drop_and_create_all, setup_db, Drink
+from database.models import (
+    setup_db,
+    Actor,
+    Movie
+)
+
 from auth.auth import AuthError, requires_auth
 
 def create_app():
   app = Flask(__name__)
-  # setup_db(app)
+  setup_db(app)
   CORS(app)
 
 
@@ -17,28 +22,40 @@ def create_app():
 #####################################################
 
   # Get Actors
-  @app.route('/actors')
+  @app.route('/actors', methods=['GET'])
   @requires_auth('get:actors')
   def get_actors(token):
-    print('Getting Actors...')
-    return jsonify({"message": "Actors"})
+    # Get all actors
+    print('getting actors...')
+    actors = Actor.query.all()
+    serialized_actors = [actor.short() for actor in actors]
+
+    return jsonify({"actors": serialized_actors})
 
   # Post Actors
-  @app.route('/actors')
+  @app.route('/actors', methods=['POST'])
   @requires_auth('post:actors')
   def create_actors(token):
-    print('Creating a new actor actor...')
-    return jsonify({"message": "Actors"})
+    # Get json object
+    body = request.get_json()
+    name = body.get('name', None)
+    age = body.get('age', None)
+    gender = body.get('gender', None)
+    # Save the new actor
+    actor = Actor(name=name, age=age, gender=gender)
+    actor.insert()
+    # Return
+    return jsonify({"new_actor": actor.short()})
 
   # Edit Actors
-  @app.route('/actors')
+  @app.route('/actors', methods=['PATCH'])
   @requires_auth('edit:actors')
   def edit_actors(token):
     print('Edit Actors...')
     return jsonify({"message": "Actors"})
 
   # Delete Actor
-  @app.route('/actors')
+  @app.route('/actors', methods=['DELETE'])
   @requires_auth('delete:actors')
   def delete_actors(token):
     print('Edit Actors...')
@@ -52,28 +69,38 @@ def create_app():
 #####################################################
 
   # Get Movies
-  @app.route('/movies')
+  @app.route('/movies', methods=['GET'])
   @requires_auth('get:movies')
   def get_movies(token):
-    print('Getting Movies...')
-    return jsonify({"message": "Movies"})
+    print('getting actors...')
+    movies = Movie.query.all()
+    serialized_movies = [movie.short() for movie in movies]
+
+    return jsonify({"movies": serialized_movies})
 
   # Create Movies
-  @app.route('/movies')
+  @app.route('/movies', methods=['POST'])
   @requires_auth('post:movies')
   def create_movies(token):
-    print('Creating Movies...')
-    return jsonify({"message": "Movies"})
+    # Get json object
+    body = request.get_json()
+    title = body.get('title', None)
+    release_date = body.get('release_date', None)
+    # Save the new movie
+    movie = Movie(title=title, release_date=release_date)
+    movie.insert()
+    # Return
+    return jsonify({"new_movie": movie.short()})
 
   # Edit Movies
-  @app.route('/movies')
+  @app.route('/movies', methods=['PATCH'])
   @requires_auth('edit:movies')
   def edit_movies(token):
     print('Edit Movies...')
     return jsonify({"message": "Movies"})
 
   # Delete Movie
-  @app.route('/movies')
+  @app.route('/movies', methods=['DELETE'])
   @requires_auth('delete:movies')
   def delete_movies(token):
     print('Delete Movies...')
@@ -123,6 +150,7 @@ def create_app():
 #####################################################
 #####################################################
 
+  # RUN APPLICATION
   if __name__ == '__main__':
     app.run(debug=True)
 
