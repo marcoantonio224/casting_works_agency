@@ -1,10 +1,12 @@
 import react from 'react';
 import React, { useState, useEffect } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
-import { getData, postData } from '../../api/api';
+import { getData, postData, deleteData } from '../../api/api';
 import Form from '../Forms/Actor';
+import ModalComponent from '../ModalComponent/index';
 import new_actors from '../../assets/images/new_actors.jpg';
 import casting from '../../assets/images/casting.jpg';
+import { Button } from 'react-bootstrap';
 import './main.css';
 
 
@@ -13,7 +15,7 @@ function Actors() {
   const [token, setToken] = useState(false);
   const { user, isAuthenticated , getAccessTokenSilently } = useAuth0()
 
-  const getUserMetadata = async () => {
+  const getUsers = async () => {
     // Async function for actors audience token
     try {
       // Grab token from auth0
@@ -40,18 +42,26 @@ function Actors() {
   function onSubmitForm(formData) {
     // Send new actor to server post '/actors' endpoint
     postData(token, '/actors', formData)
-    .then(res=>{
-      setActors([...actors, res.data.new_actor])
+    .then(res => {
+      setActors([...actors, res.data.new_actor]);
     })
     .catch(err => console.log(err))
   }
 
+  function deleteActor(id) {
+    deleteData(token, 'actors', id)
+    .then(res => {
+      // Re-render actors
+      getUsers();
+    })
+  }
+
   useEffect(()=>{
     // Call function to obtain token
-    getUserMetadata();
+    getUsers();
 
   }, []);
-    console.log(actors)
+
     return (
       <section className="main-content-actors">
         <div className="sub-content">
@@ -78,6 +88,15 @@ function Actors() {
                         <h4>{actor.name}</h4>
                         <h5>{actor.age}</h5>
                         <h6>{actor.gender}</h6>
+                        <ModalComponent
+                          variant="outline-light"
+                          category={actor}
+                          token={token}
+                          getUsers={getUsers}
+                        />
+                        <Button
+                          variant="outline-light"
+                          onClick={()=>deleteActor(actor.id)}>Delete</Button>
                       </div>
                     )}
                   </div>

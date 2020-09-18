@@ -35,3 +35,38 @@ export const postData = async (token, category, data) => {
               .then(res => res)
               .catch(err => console.log(err))
 }
+
+export const editData = async (token, category, id , data) => {
+  // Sent token to server for Auth0 validation for permission of actions
+  const api_server = process.env.REACT_APP_AUTH0_API_SERVER;
+  // Options for api request to server for data
+  const options = {
+    url: `${api_server}/${category}/${id}`,
+    method: 'PATCH',
+    headers: {
+      'Accept': 'application/json',
+      'Authorization': `Bearer ${token}` // Send the token from Auth0
+    },
+    data: data
+  };
+  return await axios(options)
+            .then(res => res)
+            .catch(err => console.log(err))
+}
+
+export const deleteData = async (token, category, id) => {
+  // Sent token to server for Auth0 validation for permission of actions
+  const api_server = process.env.REACT_APP_AUTH0_API_SERVER;
+  // Options for api request to server for data
+  const options = {
+    url: `${api_server}/${category}/${id}`,
+    method: 'DELETE',
+    headers: {
+      'Accept': 'application/json',
+      'Authorization': `Bearer ${token}` // Send the token from Auth0
+    }
+  };
+  return await axios(options)
+            .then(res => res)
+            .catch(err => console.log(err))
+}

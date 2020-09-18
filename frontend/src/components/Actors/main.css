@@ -27,5 +27,12 @@ li {
 
 .actors-container {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+.actors-container > div{
+  border: 1px solid white;
+  margin-right: 3vw;
+  margin-bottom: 3vw;
+  padding:5%;
 }

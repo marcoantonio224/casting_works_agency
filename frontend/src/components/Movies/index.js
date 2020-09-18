@@ -1,10 +1,12 @@
 import react from 'react';
 import React, { useState, useEffect } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
-import { getData, postData } from '../../api/api';
+import { getData, postData, deleteData } from '../../api/api';
+import ModalComponent from '../ModalComponent/index';
 import Form from '../Forms/Movie';
 import film_shooting from '../../assets/images/film_shooting.jpg'
 import casting from '../../assets/images/casting.jpg';
+import { Button } from 'react-bootstrap'
 import './main.css';
 
 function Movies() {
@@ -13,7 +15,7 @@ function Movies() {
   const { user, isAuthenticated, getAccessTokenSilently } = useAuth0();
 
   // Async function for movies audience token
-  const getUserMetadata = async () => {
+  const getMovies = async () => {
     try {
       // Grab token from auth0
       const accessToken = await getAccessTokenSilently({
@@ -39,18 +41,25 @@ function Movies() {
   function onSubmitForm(formData) {
     // Send new movie to server post '/movies' endpoint
     postData(token, '/movies', formData)
-    .then(res=>{
+    .then(res => {
       setMovies([...movies, res.data.new_movie])
     })
     .catch(err => console.log(err))
   }
 
+  function deleteMovie(id) {
+    deleteData(token, 'movies', id)
+    .then(res => {
+      // Re-render movies
+      getMovies();
+    })
+  }
+
   useEffect(()=>{
     // Call function to obtain token
-    getUserMetadata();
+    getMovies();
 
   }, []);
-  console.log(movies)
   return (
     <section className="main-content-actors">
       <div className="sub-content">
@@ -78,6 +87,15 @@ function Movies() {
                       <div key={idx}>
                         <h4>{movie.title}</h4>
                         <h5>{movie.release_date}</h5>
+                        <ModalComponent
+                          variant="outline-light"
+                          category={movie}
+                          token={token}
+                          getMovies={getMovies}
+                        />
+                        <Button
+                          variant="outline-light"
+                          onClick={()=>deleteMovie(movie.id)}>Delete</Button>
                       </div>
                     )}
                 </div>

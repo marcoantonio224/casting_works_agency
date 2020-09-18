@@ -6,6 +6,7 @@ import {postData} from '../../api/api';
 import { useAuth0 } from '@auth0/auth0-react';
 
 function ActorsForm (props) {
+  const [update, setUpdate] = useState(false);
   const [actor, setActor] = useState({});
   const { register, handleSubmit } = useForm();
   const { token } = props; // Get Auth0 token
