@@ -112,7 +112,7 @@ def create_app(test_config=None):
       # Get Movies
       movies = Movie.query.order_by(Movie.id).all()
       serialized_movies = [movie.short() for movie in movies]
-      return jsonify({"movies": serialized_movies})
+      return jsonify({"success": True,"movies": serialized_movies})
     except:
       abort(422)
 
@@ -129,7 +129,7 @@ def create_app(test_config=None):
       movie = Movie(title=title, release_date=release_date)
       movie.insert()
       # Return
-      return jsonify({"new_movie": movie.short()})
+      return jsonify({"success": True, "new_movie": movie.short()})
     except:
       abort(422)
 
@@ -163,7 +163,6 @@ def create_app(test_config=None):
   @app.route('/movies/<int:id>', methods=['DELETE'])
   @requires_auth('delete:movies')
   def delete_movies(token, id):
-    print(id)
     if id is None:
       abort(404)
     try:

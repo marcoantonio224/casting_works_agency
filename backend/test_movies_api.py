@@ -6,7 +6,7 @@ import http.client
 from flask_sqlalchemy import SQLAlchemy
 
 from flaskr import create_app
-from database.models import setup_db, Actor, Movie
+from database.models import setup_db, Movie
 
 AUTH0_DOMAIN = os.getenv('AUTH0_DOMAIN')
 AUTH0_CLIENT_ID = os.getenv('AUTH0_CLIENT_ID')
@@ -39,18 +39,18 @@ class CastingWorksTestCase(unittest.TestCase):
       'Content-Type': 'application/json'
     }
 
-    # New actor object success
-    self.new_actor = {
-      'name':'John Doe',
-      'age': '24',
-      'gender': 'Male'
+    # New movie object success
+    self.new_movie = {
+      'title':'Spider Man 10',
+      'release_date': '2021-09-30'
     }
-    # New actor object failure because of an empty field
-    self.new_actor_fail = {
-      'name':'',
-      'age': '33',
-      'gender': 'Male'
+    # New movie object failure because of an empty field
+    self.new_movie_fail = {
+      'title':'',
+      'relase_date': '2020-09-30'
     }
+
+
 
     with self.app.app_context():
       self.db = SQLAlchemy(self.app)
@@ -58,31 +58,30 @@ class CastingWorksTestCase(unittest.TestCase):
       # Create tables
       self.db.create_all()
       # Get the first actor in the list to test editing
-      self.actor_id = Actor.query.all()[0].short()['id']
+      self.movie_id = Movie.query.all()[0].short()['id']
       # Get the last actor in the list to test deleting
-      self.delete_actor_id = Actor.query.all().pop().short()['id']
+      self.delete_movie_id = Movie.query.all().pop().short()['id']
 
   def tearDown(self):
     """ Executed after reach test """
     pass
 
-
+#===================================== MOVIES =========================================
+#======================================================================================
 
   #============== GET /actors =================
-  #============================================
-
   # Success Request
-  def test_get_actors_success(self):
-    response = self.client().get("/actors", headers=self.headers)
+  def test_get_movies_success(self):
+    response = self.client().get("/movies", headers=self.headers)
     data = json.loads(response.data)
     # Assertions
     self.assertEqual(response.status_code, 200)
     self.assertEqual(data['success'], True)
-    self.assertTrue(data['actors'])
+    self.assertTrue(data['movies'])
 
   # Unauthorized Request
-  def test_get_actors_unauthorized(self):
-    response = self.client().get( "/actors", headers=self.headers_unauth)
+  def test_get_movies_unauthorized(self):
+    response = self.client().get( "/movies", headers=self.headers_unauth)
     data = json.loads(response.data)
     # Assertions
     self.assertEqual(response.status_code, 401)
@@ -90,8 +89,8 @@ class CastingWorksTestCase(unittest.TestCase):
     self.assertEqual(data['message'], 'Unauthorized')
 
   # Failed Request
-  def test_get_actors_failure(self):
-    response = self.client().get( "/actorsFail", headers=self.headers)
+  def test_get_movies_failure(self):
+    response = self.client().get( "/moviesFail", headers=self.headers)
     data = json.loads(response.data)
     # Assertions
     self.assertEqual(response.status_code, 404)
@@ -99,20 +98,18 @@ class CastingWorksTestCase(unittest.TestCase):
     self.assertEqual(data['message'], "Resource not found")
 
   #============== POST /actors =================
-  #=============================================
-
   # Success Request
-  def test_create_actor_success(self):
-    response = self.client().post( '/actors', headers=self.headers, data=json.dumps(self.new_actor))
+  def test_create_movie_success(self):
+    response = self.client().post( '/movies', headers=self.headers, data=json.dumps(self.new_movie))
     data = json.loads(response.data)
     # Assertions
     self.assertEqual(response.status_code, 200)
-    self.assertTrue(data['new_actor'])
+    self.assertTrue(data['new_movie'])
     self.assertEqual(data['success'], True)
 
   # Unauthorized Request
-  def test_create_actor_unauthorized(self):
-    response = self.client().post( '/actors', headers=self.headers_unauth, data=json.dumps(self.new_actor))
+  def test_create_movie_unauthorized(self):
+    response = self.client().post( '/movies', headers=self.headers_unauth, data=json.dumps(self.new_movie))
     data = json.loads(response.data)
     # Assertions
     self.assertEqual(response.status_code, 401)
@@ -120,8 +117,8 @@ class CastingWorksTestCase(unittest.TestCase):
     self.assertEqual(data['message'], 'Unauthorized')
 
   # Failed Request
-  def test_create_actor_failure(self):
-    response = self.client().post( "/actors", headers=self.headers, data=json.dumps(self.new_actor_fail))
+  def test_create_movie_failure(self):
+    response = self.client().post( "/movies", headers=self.headers, data=json.dumps(self.new_movie_fail))
     data = json.loads(response.data)
     # Assertions
     self.assertEqual(response.status_code, 422)
@@ -129,21 +126,19 @@ class CastingWorksTestCase(unittest.TestCase):
     self.assertEqual(data['message'], "Unprocessable")
 
   #============== PATCH /actors =================
-  #=============================================
-
   # Success Request
-  def test_edit_actor_success(self):
-    updated_actor = self.new_actor
-    response = self.client().patch( '/actors/{}'.format(self.actor_id), headers=self.headers, data=json.dumps(updated_actor))
+  def test_edit_movie_success(self):
+    updated_movie = self.new_movie
+    response = self.client().patch( '/movies/{}'.format(self.movie_id), headers=self.headers, data=json.dumps(updated_movie))
     data = json.loads(response.data)
     # Assertions
     self.assertEqual(response.status_code, 200)
-    self.assertTrue(data['updated_actor'])
+    self.assertTrue(data['updated_movie'])
     self.assertEqual(data['success'], True)
 
   # Unauthorized Request
-  def test_create_actor_unauthorized(self):
-    response = self.client().patch( '/actors/{}'.format(self.actor_id), headers=self.headers_unauth, data=json.dumps(self.new_actor))
+  def test_edit_movie_unauthorized(self):
+    response = self.client().patch( '/movies/{}'.format(self.movie_id), headers=self.headers_unauth, data=json.dumps(self.new_movie))
     data = json.loads(response.data)
     # Assertions
     self.assertEqual(response.status_code, 401)
@@ -151,8 +146,8 @@ class CastingWorksTestCase(unittest.TestCase):
     self.assertEqual(data['message'], 'Unauthorized')
 
   # Failed Request
-  def test_create_actor_failure(self):
-    response = self.client().patch( '/actors/{}'.format(self.actor_id), headers=self.headers, data=json.dumps(self.new_actor_fail))
+  def test_cedit_movie_failure(self):
+    response = self.client().patch( '/movies/{}'.format(self.movie_id), headers=self.headers, data=json.dumps(self.new_movie_fail))
     data = json.loads(response.data)
     # Assertions
     self.assertEqual(response.status_code, 422)
@@ -160,19 +155,18 @@ class CastingWorksTestCase(unittest.TestCase):
     self.assertEqual(data['message'], "Unprocessable")
 
   #============== DELETE /actors ===============
-  #=============================================
-  def test_delete_actor_success(self):
-    updated_actor = self.new_actor
-    response = self.client().delete( '/actors/{}'.format(self.delete_actor_id), headers=self.headers)
+  def test_delete_movie_success(self):
+    updated_actor = self.new_movie
+    response = self.client().delete( '/movies/{}'.format(self.delete_movie_id), headers=self.headers)
     data = json.loads(response.data)
     # Assertions
     self.assertEqual(response.status_code, 200)
     self.assertEqual(data['success'], True)
-    self.assertEqual(data['delete'], self.delete_actor_id)
+    self.assertEqual(data['delete'], self.delete_movie_id)
 
   # Unauthorized Request
-  def test_delete_actor_unauthorized(self):
-    response = self.client().delete( '/actors/{}'.format(self.delete_actor_id), headers=self.headers_unauth)
+  def test_delete_movie_unauthorized(self):
+    response = self.client().delete( '/movies/{}'.format(self.delete_movie_id), headers=self.headers_unauth)
     data = json.loads(response.data)
     # Assertions
     self.assertEqual(response.status_code, 401)
@@ -180,8 +174,8 @@ class CastingWorksTestCase(unittest.TestCase):
     self.assertEqual(data['message'], 'Unauthorized')
 
   # Failed Request
-  def test_delete_actor_failure(self):
-    response = self.client().delete( '/actors/dsds{}'.format(self.delete_actor_id), headers=self.headers)
+  def test_delete_movie_failure(self):
+    response = self.client().delete( '/movies/dsds{}'.format(self.delete_movie_id), headers=self.headers)
     data = json.loads(response.data)
     # Assertions
     self.assertEqual(response.status_code, 404)
