@@ -1,6 +1,7 @@
 import os
 import json
 from flask import Flask, request, jsonify, abort
+from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import exc
 from flask_cors import CORS
 
@@ -12,7 +13,7 @@ from database.models import (
 
 from auth.auth import AuthError, requires_auth
 
-def create_app():
+def create_app(test_config=None):
   app = Flask(__name__)
   setup_db(app)
   CORS(app)
@@ -29,9 +30,12 @@ def create_app():
     try:
       actors = Actor.query.order_by(Actor.id).all()
       serialized_actors = [actor.short() for actor in actors]
-      return jsonify({ "actors": serialized_actors })
+      return jsonify({
+        "success": True,
+        "actors": serialized_actors
+      })
     except:
-      abort(422)
+      abort(404)
   # Post Actors Router
   @app.route('/actors', methods=['POST'])
   @requires_auth('post:actors')
@@ -46,16 +50,14 @@ def create_app():
       actor = Actor(name=name, age=age, gender=gender)
       actor.insert()
       # Return
-      return jsonify({"new_actor": actor.short()})
+      return jsonify({"success":True, "new_actor": actor.short()})
     except:
-      abort(404)
+      abort(422)
 
   # Edit Actors Router
   @app.route('/actors/<int:id>', methods=['PATCH'])
   @requires_auth('edit:actors')
   def edit_actors(token, id):
-    if id is None:
-      abort(404)
     try:
       # Update Actor
       # Get JSON request object
@@ -93,7 +95,7 @@ def create_app():
           "delete": id
       })
     except:
-      abort(422)
+      abort(404)
 
 #####################################################
 #####################################################
@@ -189,7 +191,7 @@ def create_app():
       return jsonify({
                       "success": False,
                       "error": 422,
-                      "message": "unprocessable"
+                      "message": "Unprocessable"
                       }), 422
   # Error 405 (Method not allowed)
   @app.errorhandler(405)
@@ -198,14 +200,14 @@ def create_app():
                       "success": False,
                       "error": 405,
                       "message": "Method not allowed"
-                      }), 404
+                      }), 405
   # Error 404 (Resource not found)
   @app.errorhandler(404)
   def not_found(error):
       return jsonify({
                       "success": False,
                       "error": 404,
-                      "message": "resource not found"
+                      "message": "Resource not found"
                       }), 404
 
   # Error 401 (Unauthorized)
@@ -220,9 +222,9 @@ def create_app():
 #####################################################
 #####################################################
 
-  # RUN APPLICATION
-  if __name__ == '__main__':
-    app.run(debug=True)
+  # # RUN APPLICATION
+  # if __name__ == '__main__':
+  #   app.run(debug=True)
 
   return app
 

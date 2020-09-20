@@ -24,6 +24,7 @@ function Actors() {
       });
       // Set the token
       setToken(accessToken);
+      console.log(accessToken)
       // Get actors
       if(accessToken) {
         const data_actors =  getData(accessToken, '/actors')
@@ -92,7 +93,8 @@ function Actors() {
                           variant="outline-light"
                           category={actor}
                           token={token}
-                          getUsers={getUsers}
+                          getData={getUsers}
+                          form='actors'
                         />
                         <Button
                           variant="outline-light"

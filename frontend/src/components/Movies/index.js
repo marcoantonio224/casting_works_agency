@@ -91,7 +91,8 @@ function Movies() {
                           variant="outline-light"
                           category={movie}
                           token={token}
-                          getMovies={getMovies}
+                          getData={getMovies}
+                          form='movies'
                         />
                         <Button
                           variant="outline-light"

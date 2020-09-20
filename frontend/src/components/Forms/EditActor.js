@@ -5,9 +5,9 @@ import { useForm } from 'react-hook-form';
 import { editData } from '../../api/api';
 import { useAuth0 } from '@auth0/auth0-react';
 
-function EditForm (props) {
+function EditFormActor (props) {
   // Get Auth0 token
-  const { token, category: actor, getUsers, handleClose } = props;
+  const { token, category: actor, getActors, handleClose } = props;
   const [name, setName] = useState(actor.name);
   const [actors, setActors] = useState([])
   const [age, setAge ] = useState(actor.age);
@@ -28,7 +28,7 @@ function EditForm (props) {
       // Set gender
       setGender(gender);
       // Get users
-      getUsers();
+      getActors();
     })
     .catch(err => console.log(err))
   }
@@ -92,4 +92,4 @@ function EditForm (props) {
   );
 }
 
-export default EditForm;
+export default EditFormActor;

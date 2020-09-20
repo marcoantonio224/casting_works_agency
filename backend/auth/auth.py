@@ -4,7 +4,10 @@ from functools import wraps
 from jose import jwt
 from urllib.request import urlopen
 from flask import request, _request_ctx_stack, abort
+from dotenv import load_dotenv
 
+# Load environment variables
+load_dotenv()
 
 AUTH0_DOMAIN = os.getenv('AUTH0_DOMAIN')
 ALGORITHMS = ['RS256']
@@ -57,22 +60,6 @@ def get_token_auth_header():
     # Return the exception's response
     except Exception as e:
         return e
-
-def check_permissions(permission, payload):
-    # Check to see if permissions is in payload
-    if 'permissions' not in payload:
-        raise AuthError({
-            'code': 'invalid_claims',
-            'description': 'Permissions not included in JWT.'
-        }, 400)
-    # Check to see if permissions key is in payload
-    if permission not in payload['permissions']:
-        raise AuthError({
-            'code': 'unauthorized',
-            'description': 'Permission not found.'
-        }, 401)
-    # If conditions failed, then return true
-    return True
 
 
 def verify_decode_jwt(token):
@@ -129,6 +116,24 @@ def verify_decode_jwt(token):
         'code': 'invalid_header',
         'description': 'Unable to find the appropriate key.'
     }, 400)
+
+def check_permissions(permission, payload):
+    # Check to see if permissions is in payload
+    if 'permissions' not in payload:
+        raise AuthError({
+            'code': 'invalid_claims',
+            'description': 'Permissions not included in JWT.'
+        }, 400)
+    # Check to see if permissions key is in payload
+    if permission not in payload['permissions']:
+        raise AuthError({
+            'code': 'unauthorized',
+            'description': 'Permission not found.'
+        }, 401)
+    # If conditions failed, then return true
+    return True
+
+
 
 def requires_auth(permission=''):
     def requires_auth_decorator(f):

@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form';
 import { editData } from '../../api/api';
 import { useAuth0 } from '@auth0/auth0-react';
 
-function EditForm (props) {
+function EditFormMovie (props) {
   // Get Auth0 token
   const { token, category: movie, getMovies, handleClose } = props;
   const [title, setTitle] = useState(movie.title);
@@ -69,4 +69,4 @@ function EditForm (props) {
   );
 }
 
-export default EditForm;
+export default EditFormMovie;
