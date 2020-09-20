@@ -41,7 +41,7 @@ class CastingWorksTestCase(unittest.TestCase):
 
     # New movie object success
     self.new_movie = {
-      'title':'Spider Man 10',
+      'title':'Spider Man 11',
       'release_date': '2021-09-30'
     }
     # New movie object failure because of an empty field
@@ -49,8 +49,6 @@ class CastingWorksTestCase(unittest.TestCase):
       'title':'',
       'relase_date': '2020-09-30'
     }
-
-
 
     with self.app.app_context():
       self.db = SQLAlchemy(self.app)
@@ -66,10 +64,7 @@ class CastingWorksTestCase(unittest.TestCase):
     """ Executed after reach test """
     pass
 
-#===================================== MOVIES =========================================
-#======================================================================================
-
-  #============== GET /actors =================
+  #============== GET /movies =================
   # Success Request
   def test_get_movies_success(self):
     response = self.client().get("/movies", headers=self.headers)
@@ -97,7 +92,7 @@ class CastingWorksTestCase(unittest.TestCase):
     self.assertEqual(data['success'], False)
     self.assertEqual(data['message'], "Resource not found")
 
-  #============== POST /actors =================
+  #============== POST /movies =================
   # Success Request
   def test_create_movie_success(self):
     response = self.client().post( '/movies', headers=self.headers, data=json.dumps(self.new_movie))
@@ -125,7 +120,7 @@ class CastingWorksTestCase(unittest.TestCase):
     self.assertEqual(data['success'], False)
     self.assertEqual(data['message'], "Unprocessable")
 
-  #============== PATCH /actors =================
+  #============== PATCH /movies =================
   # Success Request
   def test_edit_movie_success(self):
     updated_movie = self.new_movie
@@ -154,7 +149,7 @@ class CastingWorksTestCase(unittest.TestCase):
     self.assertEqual(data['success'], False)
     self.assertEqual(data['message'], "Unprocessable")
 
-  #============== DELETE /actors ===============
+  #============== DELETE /movies ===============
   def test_delete_movie_success(self):
     updated_actor = self.new_movie
     response = self.client().delete( '/movies/{}'.format(self.delete_movie_id), headers=self.headers)

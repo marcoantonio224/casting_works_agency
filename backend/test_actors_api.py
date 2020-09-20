@@ -68,9 +68,6 @@ class CastingWorksTestCase(unittest.TestCase):
     """ Executed after reach test """
     pass
 
-#===================================== ACTORS =========================================
-#======================================================================================
-
   #============== GET /actors =================
   # Success Request
   def test_get_actors_success(self):
