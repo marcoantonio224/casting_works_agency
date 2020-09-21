@@ -66,6 +66,7 @@ export const deleteData = async (token, category, id) => {
       'Authorization': `Bearer ${token}` // Send the token from Auth0
     }
   };
+
   return await axios(options)
             .then(res => res)
             .catch(err => console.log(err))

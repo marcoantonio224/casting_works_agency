@@ -62,7 +62,6 @@ function Home() {
           </h5>
           <br />
           <div className="buttonContainers">
-              <Button variant="outline-info">Sign in</Button>
               <LoginButton />
               <LogoutButton />
           </div>

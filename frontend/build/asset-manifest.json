@@ -1,0 +1,33 @@
+{
+  "files": {
+    "main.css": "/static/css/main.bf91a481.chunk.css",
+    "main.js": "/static/js/main.dad756e6.chunk.js",
+    "main.js.map": "/static/js/main.dad756e6.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.c8a21426.js",
+    "runtime-main.js.map": "/static/js/runtime-main.c8a21426.js.map",
+    "static/css/2.d9ad5f5c.chunk.css": "/static/css/2.d9ad5f5c.chunk.css",
+    "static/js/2.9ccefaed.chunk.js": "/static/js/2.9ccefaed.chunk.js",
+    "static/js/2.9ccefaed.chunk.js.map": "/static/js/2.9ccefaed.chunk.js.map",
+    "index.html": "/index.html",
+    "precache-manifest.ef407da0d9ba49ed3e75cc280f4b7d10.js": "/precache-manifest.ef407da0d9ba49ed3e75cc280f4b7d10.js",
+    "service-worker.js": "/service-worker.js",
+    "static/css/2.d9ad5f5c.chunk.css.map": "/static/css/2.d9ad5f5c.chunk.css.map",
+    "static/css/main.bf91a481.chunk.css.map": "/static/css/main.bf91a481.chunk.css.map",
+    "static/js/2.9ccefaed.chunk.js.LICENSE.txt": "/static/js/2.9ccefaed.chunk.js.LICENSE.txt",
+    "static/media/actors_waiting.jpg": "/static/media/actors_waiting.4f31113d.jpg",
+    "static/media/casting-directors.jpg": "/static/media/casting-directors.abf2bce1.jpg",
+    "static/media/casting.jpg": "/static/media/casting.eba30cdf.jpg",
+    "static/media/casting_logos.jpg": "/static/media/casting_logos.d7b0a343.jpg",
+    "static/media/film_shooting.jpg": "/static/media/film_shooting.f84c15f0.jpg",
+    "static/media/hollywood_map.jpg": "/static/media/hollywood_map.f4945731.jpg",
+    "static/media/movies.jpg": "/static/media/movies.f9f8c5ba.jpg",
+    "static/media/new_actors.jpg": "/static/media/new_actors.b80a9217.jpg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.c8a21426.js",
+    "static/css/2.d9ad5f5c.chunk.css",
+    "static/js/2.9ccefaed.chunk.js",
+    "static/css/main.bf91a481.chunk.css",
+    "static/js/main.dad756e6.chunk.js"
+  ]
+}
