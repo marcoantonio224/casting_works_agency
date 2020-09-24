@@ -7,8 +7,10 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from sqlalchemy.orm import validates
 
-database_name="casting_works"
-database_path="postgres://{}/{}".format('localhost:5432', database_name)
+# database_name="casting_works"
+# database_path="postgres://{}/{}".format('localhost:5432', database_name)
+# Connected to Heroku
+database_path = os.environ.get("DATABASE_URL")
 
 db = SQLAlchemy()
 
@@ -34,7 +36,6 @@ class Movie(db.Model):
   id = Column(Integer, primary_key=True)
   title = Column(db.String(120), nullable=False)
   release_date = Column(db.String(120), nullable=False)
-  # actor = db.relationship('Actor', cascade='all,  delete-orphan', backref='movie', lazy=True)
 
   @validates('title','release_date')
   def validate_moives(self, keys, values):
@@ -83,7 +84,6 @@ class Actor(db.Model):
   name = Column(db.String(120), nullable=False)
   age = Column(db.Integer, nullable=False)
   gender = Column(db.String(120), nullable=False)
-  # movie = Column(db.Integer, db.ForeignKey('movie.id') )
 
   @validates('name', 'age', 'gender')
   def validate_actors(self, keys, values):

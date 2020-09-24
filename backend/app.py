@@ -4,7 +4,6 @@ from flask import Flask, request, jsonify, abort
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import exc
 from flask_cors import CORS
-
 from database.models import (
     setup_db,
     Actor,
@@ -18,6 +17,9 @@ def create_app(test_config=None):
   setup_db(app)
   CORS(app)
 
+  @app.route('/', methods=['GET'])
+  def render_welcome():
+    return "Welcome to Casting Works"
 
 ############### ACTORS API ##########################
 #####################################################
@@ -221,9 +223,10 @@ def create_app(test_config=None):
 #####################################################
 #####################################################
 
-  # # RUN APPLICATION
-  # if __name__ == '__main__':
-  #   app.run(debug=True)
 
   return app
 
+app = create_app()
+if __name__ == '__main__':
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port, debug=True)
