@@ -7,12 +7,10 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from sqlalchemy.orm import validates
 
-# database_name="casting_works"
-# database_path="postgres://{}/{}".format('localhost:5432', database_name)
-
+# Database URL from Heroku
+database_path = os.environ.get("DATABASE_URL")
 # Check to see if application is hosted on Heroku or local environment
-ON_HEROKU = 'ON_HEROKU' in os.environ
-if ON_HEROKU:
+if database_path is not None:
   # Connected to Heroku
   database_path = os.environ.get("DATABASE_URL")
 else:
