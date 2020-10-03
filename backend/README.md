@@ -203,11 +203,6 @@
 
       password: ***Producer123***
 
-  Hit the Runner feature in postman to run and test all endpoints.
-
-  You can see the results for the tested endpoints in
-  `./starter_code/backend/udacity-fsnd-udaspicelatte.postman_test_run.json`
-
   ## Deployment
   This application is deployed in Heroku. Keep in mind that there
   are 2 separate hosting applications (one for frontend/backend).
