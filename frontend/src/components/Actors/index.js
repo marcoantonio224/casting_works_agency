@@ -107,7 +107,7 @@ function Actors() {
             </div>
               :
             <div>
-              <h3>Loading</h3>
+              <h3>Log in to view actors...</h3>
             </div>
           }
         </div>

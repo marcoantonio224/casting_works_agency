@@ -105,7 +105,7 @@ function Movies() {
           </div>
             :
           <div>
-            <h3>Not Authenticated</h3>
+            <h3>Log in to view movies...</h3>
           </div>
         }
       </div>

@@ -1,0 +1,212 @@
+{
+	"id": "c7c9f72f-fd8b-409e-a954-a63ff3b373cb",
+	"name": "Casting-Works-Director",
+	"timestamp": "2020-10-02T06:43:20.858Z",
+	"collection_id": "97f6e12d-5157-4c0a-8ebc-b42c4384e042",
+	"folder_id": 0,
+	"environment_id": "0",
+	"totalPass": 2,
+	"totalFail": 0,
+	"results": [
+		{
+			"id": "6903d7b3-5f98-4845-8008-78382a6d8aa8",
+			"name": "https://casting-works-server.herokuapp.com/actors",
+			"url": "https://casting-works-server.herokuapp.com/actors",
+			"time": 265,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				265
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "620db1e6-a871-4710-837b-0463dbe3b13e",
+			"name": "https://casting-works-server.herokuapp.com/movies",
+			"url": "https://casting-works-server.herokuapp.com/movies",
+			"time": 169,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				169
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "1de9e670-41f9-419a-b10b-3cd09692e8cd",
+			"name": "https://casting-works-server.herokuapp.com/actors",
+			"url": "https://casting-works-server.herokuapp.com/actors",
+			"time": 167,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				167
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "8c6e6f46-ca3b-4a84-a1ee-a704df1ed390",
+			"name": "https://casting-works-server.herokuapp.com/movies",
+			"url": "https://casting-works-server.herokuapp.com/movies",
+			"time": 154,
+			"responseCode": {
+				"code": 401,
+				"name": "UNAUTHORIZED"
+			},
+			"tests": {
+				"Status code is 401": true
+			},
+			"testPassFailCounts": {
+				"Status code is 401": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				154
+			],
+			"allTests": [
+				{
+					"Status code is 401": true
+				}
+			]
+		},
+		{
+			"id": "81dfbac4-7da4-4dc0-9124-95a7bba655f7",
+			"name": "https://casting-works-server.herokuapp.com/actors/3",
+			"url": "https://casting-works-server.herokuapp.com/actors/3",
+			"time": 168,
+			"responseCode": {
+				"code": 422,
+				"name": "UNPROCESSABLE ENTITY"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				168
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "c54f9151-1093-4c6a-834a-531c47c90518",
+			"name": "https://casting-works-server.herokuapp.com/movies/1",
+			"url": "https://casting-works-server.herokuapp.com/movies/1",
+			"time": 165,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				165
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "0e3558b7-7a87-4da2-9dee-8e097041c3f5",
+			"name": "https://casting-works-server.herokuapp.com/movies/1",
+			"url": "https://casting-works-server.herokuapp.com/movies/1",
+			"time": 156,
+			"responseCode": {
+				"code": 401,
+				"name": "UNAUTHORIZED"
+			},
+			"tests": {
+				"Status code is 401": true
+			},
+			"testPassFailCounts": {
+				"Status code is 401": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				156
+			],
+			"allTests": [
+				{
+					"Status code is 401": true
+				}
+			]
+		},
+		{
+			"id": "736c630f-2d79-47c7-a35f-6d90f57dad5c",
+			"name": "https://casting-works-server.herokuapp.com/actors/4",
+			"url": "https://casting-works-server.herokuapp.com/actors/4",
+			"time": 159,
+			"responseCode": {
+				"code": 404,
+				"name": "NOT FOUND"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				159
+			],
+			"allTests": [
+				{}
+			]
+		}
+	],
+	"count": 1,
+	"totalTime": 1403,
+	"collection": {
+		"requests": [
+			{
+				"id": "6903d7b3-5f98-4845-8008-78382a6d8aa8",
+				"method": "GET"
+			},
+			{
+				"id": "620db1e6-a871-4710-837b-0463dbe3b13e",
+				"method": "GET"
+			},
+			{
+				"id": "1de9e670-41f9-419a-b10b-3cd09692e8cd",
+				"method": "POST"
+			},
+			{
+				"id": "8c6e6f46-ca3b-4a84-a1ee-a704df1ed390",
+				"method": "POST"
+			},
+			{
+				"id": "81dfbac4-7da4-4dc0-9124-95a7bba655f7",
+				"method": "PATCH"
+			},
+			{
+				"id": "c54f9151-1093-4c6a-834a-531c47c90518",
+				"method": "PATCH"
+			},
+			{
+				"id": "0e3558b7-7a87-4da2-9dee-8e097041c3f5",
+				"method": "DELETE"
+			},
+			{
+				"id": "736c630f-2d79-47c7-a35f-6d90f57dad5c",
+				"method": "DELETE"
+			}
+		]
+	}
+}

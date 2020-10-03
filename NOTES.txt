@@ -1,0 +1,7 @@
+Frontend is hosted on heroku
+Backend is hosted on Heroku
+
+backend -> need to fix UNIT TESTING for app
+frontend -> change environ variables (already did)
+
+Change the login to logout when authenticated.
