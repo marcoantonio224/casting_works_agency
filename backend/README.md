@@ -107,28 +107,36 @@
   ### Actors
   TYPE: `GET`
   API Endpoint: `https://casting-works-server.herokuapp.com/actors`
+
   **Output**
+
   - 200: `{'actors': [{'age': 24, .............. 'id': 52, 'name': 'John Doe'}], 'success': True}`
   - 401: `{'error': 401, 'message': 'Unauthorized', 'success': False}`
   - 404  `{'error': 404, 'message': 'Resource not found', 'success': False}`
 
   TYPE: `POST`
   API Endpoint: `https://casting-works-server.herokuapp.com/actors`
+
   **Output**
+
   - 200: `{'new_actor': {'age': 24, 'gender': 'Male', 'id': 66, 'name': 'John Doe'}, 'success': True}`
   - 401: `{'error': 401, 'message': 'Unauthorized', 'success': False}`
   - 404  `{'error': 422, 'message': 'Unprocessable', 'success': False}`
 
   TYPE: `PATCH`
   API Endpoint: `https://casting-works-server.herokuapp.com/actors/28`
+
   **Output**
+
   - 200: `{'success': True, 'updated_actor': [{'age': 24, 'gender': 'Male', 'id': 28, 'name': 'John Doe'}]}`
   - 401: `{'error': 401, 'message': 'Unauthorized', 'success': False}`
   - 404  `{'error': 422, 'message': 'Unprocessable', 'success': False}`
 
   TYPE: `DELETE`
   API Endpoint: `https://casting-works-server.herokuapp.com/actors/28`
+
   **Output**
+
   - 200: `{'delete': 28, 'success': True}`
   - 401: `{'error': 401, 'message': 'Unauthorized', 'success': False}`
   - 404  `{'error': 404, 'message': 'Resource not found', 'success': False}`
@@ -136,28 +144,36 @@
   ### Movies
   TYPE: `GET`
   API Endpoint: `https://casting-works-server.herokuapp.com/movies`
+
   **Output**
+
   - 200: `{'movies': [{'id': 1, 'release_date': '2021-09-30', ... 'title': 'Spider Man 10'}], 'success': True}`
   - 401: `{'error': 401, 'message': 'Unauthorized', 'success': False}`
   - 404  `{'error': 404, 'message': 'Resource not found', 'success': False}`
 
   TYPE: `POST`
   API Endpoint: `https://casting-works-server.herokuapp.com/movies`
+
   **Output**
+
   - 200: `{'new_movie': {'id': 18, 'release_date': '2021-09-30', 'title': 'Spider Man 11'}, 'success': True}`
   - 401: `{'error': 401, 'message': 'Unauthorized', 'success': False}`
   - 404  `{'error': 422, 'message': 'Unprocessable', 'success': False}`
 
   TYPE: `PATCH`
   API Endpoint: `https://casting-works-server.herokuapp.com/movies/1`
+
   **Output**
+
   - 200: `{'success': True, 'updated_movie': [{'id': 1, 'release_date': '2021-09-30', 'title': 'Spider Man 11'}]}`
   - 401: `{'error': 401, 'message': 'Unauthorized', 'success': False}`
   - 404  `{'error': 422, 'message': 'Unprocessable', 'success': False}`
 
   TYPE: `DELETE`
   API Endpoint: `https://casting-works-server.herokuapp.com/movies/18`
+
   **Output**
+
   - 200: `{'delete': 18, 'success': True}`
   - 401: `{'error': 401, 'message': 'Unauthorized', 'success': False}`
   - 404  `{'error': 404, 'message': 'Resource not found', 'success': False}`
