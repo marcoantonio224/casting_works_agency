@@ -94,6 +94,10 @@
   **API Keys**: This version of the application **does**  require authentication or API Keys.
 
   ## Postman Tests
+  Our RESTful API application are tested using postman.
+  If you do not have postman installed, please take the time to install it
+  [https://www.postman.com/downloads/]
+
   [View the postman tests here.](./postman_tests)
 
   ## Unit Testing
@@ -178,11 +182,8 @@
   - 401: `{'error': 401, 'message': 'Unauthorized', 'success': False}`
   - 404  `{'error': 404, 'message': 'Resource not found', 'success': False}`
 
-
-
-  Our RESTful API application are tested using postman.
-  If you do not have postman installed, please take the time to install it
-  [https://www.postman.com/downloads/]
+  ### Accounts Registered
+  Here are some accounts registered with already with Auth0, feel free to login with these credentials to access and test priviledges
 
   - **Assitant**:
 
