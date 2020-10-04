@@ -25,12 +25,13 @@ function Movies() {
       setToken(accessToken);
       // Get movies
       if(accessToken) {
-        const data_movies = getData(accessToken, '/movies')
+        getData(accessToken, '/movies')
         .then(res => {
             if(res) {
               setMovies(res.data.movies);
             }
         })
+        .catch(err => alert('Ooops, something went wrong!'))
       }
     // Catch error
     } catch(err) {
@@ -42,9 +43,9 @@ function Movies() {
     // Send new movie to server post '/movies' endpoint
     postData(token, '/movies', formData)
     .then(res => {
-      setMovies([...movies, res.data.new_movie])
+      setMovies([...movies, res.data.new_movie]);
     })
-    .catch(err => console.log(err))
+    .catch(err => alert("You are unauthorized to perform this action") );
   }
 
   function deleteMovie(id) {
@@ -52,7 +53,7 @@ function Movies() {
     .then(res => {
       // Re-render movies
       getMovies();
-    })
+    }).catch(err => alert("You are unauthorized to perform this action") );
   }
 
   useEffect(()=>{
@@ -87,16 +88,19 @@ function Movies() {
                       <div key={idx}>
                         <h4>{movie.title}</h4>
                         <h5>{movie.release_date}</h5>
-                        <ModalComponent
-                          variant="outline-light"
-                          category={movie}
-                          token={token}
-                          getData={getMovies}
-                          form='movies'
-                        />
-                        <Button
-                          variant="outline-light"
-                          onClick={()=>deleteMovie(movie.id)}>Delete</Button>
+                        <div className="sub-cont-btns">
+                          <ModalComponent
+                            variant="outline-light"
+                            category={movie}
+                            token={token}
+                            getData={getMovies}
+                            form='movies'
+                          />
+                          <Button
+                            variant="outline-light"
+                            onClick={()=>deleteMovie(movie.id)}>Delete</Button>
+                        </div>
+
                       </div>
                     )}
                 </div>

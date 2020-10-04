@@ -2,3 +2,17 @@
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
 }
+
+.movies-container > div{
+  border: 1px solid #fff;
+  margin-right: 3vw;
+  margin-bottom: 3vw;
+  padding: 5%;
+}
+
+.sub-cont-btns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: 50%;
+  margin: 0 auto;
+}

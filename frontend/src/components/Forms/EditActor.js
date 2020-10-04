@@ -30,11 +30,10 @@ function EditFormActor (props) {
       // Get users
       getActors();
     })
-    .catch(err => console.log(err))
+    .catch(err => alert("You are unauthorized to perform this action") );
   }
 
   useEffect(()=>{
-
   }, []);
 
   return (

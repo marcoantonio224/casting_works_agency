@@ -27,7 +27,7 @@ function EditFormMovie (props) {
       // Get Movies
       getMovies();
     })
-    .catch(err => console.log(err))
+    .catch(err => alert("You are unauthorized to perform this action") )
   }
 
   return (

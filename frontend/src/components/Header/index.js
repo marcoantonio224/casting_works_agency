@@ -5,7 +5,7 @@ import logos from '../../assets/images/casting_logos.jpg';
 import './main.css';
 
 function Header() {
-  const { user, getAccessTokenSilently,loginWithRedirect } = useAuth0();
+  const { user, isAuthenticated, getAccessTokenSilently, loginWithRedirect, logout } = useAuth0();
 
   const { nickname } = user || {};
 
@@ -20,10 +20,14 @@ function Header() {
                 <Link to='/'>Home</Link>
                 <Link to='/actors'>Actors</Link>
                 <Link to='/movies'>Movies</Link>
-                {/* <Link>About Us</Link> */}
             </ul>
             <ul>
+              {isAuthenticated ?
+              <Link onClick={() => logout()}>Logout</Link>
+              :
               <Link onClick={() => loginWithRedirect()}>Login</Link>
+              }
+
             </ul>
         </nav>
     </header>

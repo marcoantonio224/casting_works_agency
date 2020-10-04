@@ -27,12 +27,12 @@ function Actors() {
       console.log(accessToken)
       // Get actors
       if(accessToken) {
-        const data_actors =  getData(accessToken, '/actors')
+        getData(accessToken, '/actors')
         .then(res => {
           if(res) {
             setActors(res.data.actors);
           }
-        });
+        })
      }
      // Catch error
     } catch(err) {
@@ -46,7 +46,7 @@ function Actors() {
     .then(res => {
       setActors([...actors, res.data.new_actor]);
     })
-    .catch(err => console.log(err))
+    .catch(err => alert("You are unauthorized to perform this action"))
   }
 
   function deleteActor(id) {
@@ -55,6 +55,7 @@ function Actors() {
       // Re-render actors
       getUsers();
     })
+    .catch(err => alert("You are unauthorized to perform this action") );
   }
 
   useEffect(()=>{
@@ -80,7 +81,6 @@ function Actors() {
             <div>
               <h3>CastingWorks Actresses & Actors</h3>
               <div>
-              <h3>Actors</h3>
                 {
                   (actors.length === 0) ? <h4>There are no current actors.</h4> :
                   <div className="actors-container">
@@ -89,16 +89,19 @@ function Actors() {
                         <h4>{actor.name}</h4>
                         <h5>{actor.age}</h5>
                         <h6>{actor.gender}</h6>
-                        <ModalComponent
-                          variant="outline-light"
-                          category={actor}
-                          token={token}
-                          getData={getUsers}
-                          form='actors'
-                        />
-                        <Button
-                          variant="outline-light"
-                          onClick={()=>deleteActor(actor.id)}>Delete</Button>
+                        <div className="sub-cont-btns">
+                          <ModalComponent
+                            variant="outline-light"
+                            category={actor}
+                            token={token}
+                            getData={getUsers}
+                            form='actors'
+                          />
+                          <Button
+                            variant="outline-light"
+                            onClick={()=>deleteActor(actor.id)}>Delete</Button>
+                        </div>
+
                       </div>
                     )}
                   </div>

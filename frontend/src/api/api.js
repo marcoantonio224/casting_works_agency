@@ -15,7 +15,7 @@ export const getData = (token, category) => {
 
    return axios(options)
           .then(response => response)
-          .catch(err => console.log(err))
+          .catch(err => err)
 }
 
 export const postData = async (token, category, data) => {
@@ -33,7 +33,7 @@ export const postData = async (token, category, data) => {
     };
     return await axios(options)
               .then(res => res)
-              .catch(err => console.log(err))
+              .catch(err => err)
 }
 
 export const editData = async (token, category, id , data) => {
@@ -51,7 +51,7 @@ export const editData = async (token, category, id , data) => {
   };
   return await axios(options)
             .then(res => res)
-            .catch(err => console.log(err))
+            .catch(err => err)
 }
 
 export const deleteData = async (token, category, id) => {
@@ -69,5 +69,5 @@ export const deleteData = async (token, category, id) => {
 
   return await axios(options)
             .then(res => res)
-            .catch(err => console.log(err))
+            .catch(err => err)
 }

@@ -1,8 +1,6 @@
 import react from 'react';
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import LoginButton from '../LoginButton/index';
-import LogoutButton from '../LogoutButton/index';
 
 import casting from '../../assets/images/casting.jpg';
 import new_actors from '../../assets/images/new_actors.jpg';
@@ -27,29 +25,7 @@ const main = {
 
 function Home() {
   const [token, setToken] = useState(false);
-  const { user, getAccessTokenSilently } = useAuth0();
-
-  // useEffect(()=>{
-
-  //   const getUserMetadata = async () => {
-
-  //     const domain = process.env.REACT_APP_AUTH0_DOMAIN
-
-  //     try {
-  //       // Grab token from auth0
-  //       const accessToken = await getAccessTokenSilently({
-  //         audience: 'https://castingworksfsnd.us.auth0.com/api/v2/'
-  //       });
-
-  //     } catch(err) {
-  //       console.log('User not signed in')
-  //     }
-
-
-  //   }
-  //   getUserMetadata();
-
-  // },[])
+  const { user ,getAccessTokenSilently } = useAuth0();
   const { nickname } = user || {};
   return (
     <div className="main-content">
@@ -61,10 +37,6 @@ function Home() {
                 life begins now.
           </h5>
           <br />
-          <div className="buttonContainers">
-              <LoginButton />
-              <LogoutButton />
-          </div>
         </div>
       </div>
       <section className="section1">
@@ -73,7 +45,7 @@ function Home() {
             <p className="text-column">
               Famous actors and actresses of stage and screen light up the world from Hollywood to Broadway and beyond. Stars like Marilyn Monroe, Will Smith, Johnny Depp, Robert Downey Jr., Angelina Jolie and Charlie Chaplin illuminate the human condition by bringing compelling characters to life.
               <br />
-              <Link><Button variant="outline-light">Actors</Button></Link>
+              <Link to="/actors"><Button variant="outline-light">Actors</Button></Link>
             </p>
 
         </div>
@@ -91,7 +63,7 @@ function Home() {
               next cinema ? Got the next idea for a big hit ? Don't waste any
               more time and join today.
               <br />
-              <Link to="/actors"><Button variant="outline-light">Movies</Button></Link>
+              <Link to="/movies"><Button variant="outline-light">Movies</Button></Link>
             </p>
         </div>
       </section>

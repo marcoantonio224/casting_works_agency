@@ -36,3 +36,10 @@ li {
   margin-bottom: 3vw;
   padding:5%;
 }
+
+.sub-cont-btns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: 50%;
+  margin: 0 auto;
+}

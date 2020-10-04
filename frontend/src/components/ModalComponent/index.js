@@ -5,7 +5,6 @@ import { getData, postData, editData, deleteData } from '../../api/api';
 import EditFormActor from '../Forms/EditActor';
 import EditFormMovie from '../Forms/EditMovie';
 import { Button, Modal } from 'react-bootstrap';
-// import './main.css';
 
 
 function ModalComponent({category, token, getData, form}) {
@@ -13,7 +12,7 @@ function ModalComponent({category, token, getData, form}) {
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  console.log(category,'cat')
+
   return (
     <div>
       <Button variant="outline-light" onClick={handleShow}>
